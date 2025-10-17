@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KEXP Now Playing</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>KEXP Now Playing</h1>
+      <a href="https://www.kexp.org/playlist/" target="_blank" class="listen-link">
+        Listen to livestream
+      </a>
+    </div>
+
+    <div id="loading" class="loading">
+      <p>Loading...</p>
+    </div>
+
+    <div id="error" class="error" style="display: none;">
+      <p>Unable to load track information</p>
+    </div>
+
+    <div id="track-info" class="track-info" style="display: none;">
+      <div class="track-content">
+        <div class="details">
+          <div class="track-name" id="track-name"></div>
+          <div class="artist-name" id="artist-name"></div>
+          <div class="album-name" id="album-name"></div>
+          <div class="label-name" id="label-name"></div>
+          <div class="airdate" id="airdate"></div>
+        </div>
+
+        <div id="album-art" class="album-art"></div>
+      </div>
+
+      <div id="comments" class="comments"></div>
+
+      <div id="bandcamp-section" class="bandcamp-section">
+        <a id="bandcamp-link" href="#" target="_blank" class="bandcamp-button">
+          Find on Bandcamp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
