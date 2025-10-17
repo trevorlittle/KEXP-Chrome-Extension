@@ -12,7 +12,6 @@ A Chrome extension that displays what's currently playing on KEXP.org radio stre
   - Record label
   - Play time
   - DJ comments (when available)
-- Refresh button to get latest track info
 - Clean, dark-themed interface matching KEXP branding
 
 ## Usage
