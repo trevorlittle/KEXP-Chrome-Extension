@@ -3,9 +3,6 @@
   "name": "KEXP Now Playing",
   "version": "1.0",
   "description": "Display what's currently playing on KEXP.org radio stream",
-  "permissions": [
-    "activeTab"
-  ],
   "host_permissions": [
     "https://api.kexp.org/*"
   ],
