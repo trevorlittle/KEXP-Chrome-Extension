@@ -27,18 +27,32 @@ async function authenticateSpotify() {
     authUrl.searchParams.append('code_challenge', codeChallenge);
 
     // Step 4: Launch Chrome's OAuth flow
+    console.log('Launching Spotify OAuth flow...');
+    console.log('Auth URL:', authUrl.toString());
+    console.log('Redirect URI:', redirectUri);
+
     const responseUrl = await chrome.identity.launchWebAuthFlow({
       url: authUrl.toString(),
       interactive: true
     });
 
+    console.log('Received response URL:', responseUrl);
+
     // Step 5: Extract authorization code from redirect URL
     const urlParams = new URL(responseUrl).searchParams;
     const code = urlParams.get('code');
+    const error = urlParams.get('error');
+
+    if (error) {
+      throw new Error(`Spotify authorization error: ${error}`);
+    }
 
     if (!code) {
+      console.error('No code in response URL. Full URL:', responseUrl);
       throw new Error('No authorization code received');
     }
+
+    console.log('Authorization code received, exchanging for token...');
 
     // Step 6: Exchange authorization code for access token
     await exchangeCodeForToken(code, codeVerifier, redirectUri);
@@ -60,12 +74,21 @@ async function authenticateSpotify() {
 
 // Exchange authorization code for access and refresh tokens
 async function exchangeCodeForToken(code, codeVerifier, redirectUri) {
+  console.log('Exchanging code for token...');
+
   const body = new URLSearchParams({
     client_id: SPOTIFY_CONFIG.CLIENT_ID,
     grant_type: 'authorization_code',
     code: code,
     redirect_uri: redirectUri,
     code_verifier: codeVerifier
+  });
+
+  console.log('Token exchange request params:', {
+    client_id: SPOTIFY_CONFIG.CLIENT_ID,
+    grant_type: 'authorization_code',
+    redirect_uri: redirectUri,
+    code_verifier_length: codeVerifier.length
   });
 
   const response = await fetch(SPOTIFY_CONFIG.TOKEN_ENDPOINT, {
@@ -78,10 +101,12 @@ async function exchangeCodeForToken(code, codeVerifier, redirectUri) {
 
   if (!response.ok) {
     const error = await response.json().catch(() => ({}));
+    console.error('Token exchange failed:', error);
     throw new Error(error.error_description || 'Token exchange failed');
   }
 
   const data = await response.json();
+  console.log('Token received successfully!');
 
   // Store tokens with expiration time
   await chrome.storage.local.set({
@@ -90,6 +115,8 @@ async function exchangeCodeForToken(code, codeVerifier, redirectUri) {
     spotify_expires_at: Date.now() + (data.expires_in * 1000),
     spotify_authenticated: true
   });
+
+  console.log('Tokens stored in chrome.storage.local');
 
   // Clean up code verifier (no longer needed)
   await chrome.storage.local.remove('spotify_code_verifier');

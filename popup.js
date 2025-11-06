@@ -200,15 +200,34 @@ async function checkSpotifyAuth() {
 
 // Handle Spotify login button click
 spotifyLoginBtn.addEventListener('click', async () => {
+  console.log('Login to Spotify button clicked');
   spotifyLoginBtn.textContent = 'Logging in...';
   spotifyLoginBtn.disabled = true;
 
   const result = await authenticateSpotify();
 
+  console.log('Authentication result:', result);
+
   if (result.success) {
+    console.log('Authentication successful, checking auth status...');
     await checkSpotifyAuth();
     showSpotifyFeedback('Successfully logged in!', 'success');
+
+    // Double check auth status after a short delay
+    setTimeout(async () => {
+      const authStatus = await isAuthenticated();
+      console.log('Auth status after login:', authStatus);
+      if (!authStatus) {
+        console.error('Auth status shows not authenticated despite successful login!');
+        showSpotifyFeedback('Login may have failed. Please try again.', 'error');
+        spotifyLoginBtn.textContent = 'Login to Spotify';
+        spotifyLoginBtn.disabled = false;
+        spotifyLoginBtn.style.display = 'block';
+        spotifyStatus.style.display = 'none';
+      }
+    }, 500);
   } else {
+    console.error('Authentication failed:', result.error);
     spotifyLoginBtn.textContent = 'Login to Spotify';
     spotifyLoginBtn.disabled = false;
     showSpotifyFeedback(`Login failed: ${result.error}`, 'error');
