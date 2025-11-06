@@ -184,15 +184,22 @@ function showError() {
 
 // Check Spotify authentication status
 async function checkSpotifyAuth() {
+  console.log('>>> checkSpotifyAuth called');
   const authenticated = await isAuthenticated();
+  console.log('>>> isAuthenticated returned:', authenticated);
 
   if (authenticated) {
+    console.log('>>> User is authenticated, updating UI...');
     spotifyLoginBtn.style.display = 'none';
     spotifyStatus.style.display = 'flex';
     if (currentTrack) {
       spotifySaveBtn.disabled = false;
+      console.log('>>> Save button enabled (track available)');
+    } else {
+      console.log('>>> Save button stays disabled (no current track)');
     }
   } else {
+    console.log('>>> User is NOT authenticated, showing login button');
     spotifyLoginBtn.style.display = 'block';
     spotifyStatus.style.display = 'none';
     spotifySaveBtn.disabled = true;
@@ -201,15 +208,28 @@ async function checkSpotifyAuth() {
 
 // Handle Spotify login button click
 spotifyLoginBtn.addEventListener('click', async () => {
+  console.log('>>> Login button clicked');
   spotifyLoginBtn.textContent = 'Logging in...';
   spotifyLoginBtn.disabled = true;
 
+  console.log('>>> Calling authenticateSpotify()...');
   const result = await authenticateSpotify();
 
+  console.log('>>> Authentication result:', result);
+
   if (result.success) {
+    console.log('>>> Authentication successful, checking auth status...');
     await checkSpotifyAuth();
+
+    // Verify the UI state
+    console.log('>>> UI State after checkSpotifyAuth:');
+    console.log('  - Login button display:', spotifyLoginBtn.style.display);
+    console.log('  - Status display:', spotifyStatus.style.display);
+    console.log('  - Save button disabled:', spotifySaveBtn.disabled);
+
     showSpotifyFeedback('Successfully logged in!', 'success');
   } else {
+    console.log('>>> Authentication failed:', result.error);
     spotifyLoginBtn.textContent = 'Login to Spotify';
     spotifyLoginBtn.disabled = false;
     showSpotifyFeedback(`Login failed: ${result.error}`, 'error');
