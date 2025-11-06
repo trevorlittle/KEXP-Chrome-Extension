@@ -16,6 +16,7 @@ const bandcampLink = document.getElementById('bandcamp-link');
 
 // DOM elements - Spotify
 const spotifyLoginBtn = document.getElementById('spotify-login-btn');
+const spotifyLogoutBtn = document.getElementById('spotify-logout-btn');
 const spotifyStatus = document.getElementById('spotify-status');
 const spotifySaveBtn = document.getElementById('spotify-save-btn');
 const spotifyFeedback = document.getElementById('spotify-feedback');
@@ -212,6 +213,21 @@ spotifyLoginBtn.addEventListener('click', async () => {
     spotifyLoginBtn.textContent = 'Login to Spotify';
     spotifyLoginBtn.disabled = false;
     showSpotifyFeedback(`Login failed: ${result.error}`, 'error');
+  }
+});
+
+// Handle Spotify logout button click
+spotifyLogoutBtn.addEventListener('click', async () => {
+  const result = await logoutSpotify();
+
+  if (result.success) {
+    await checkSpotifyAuth();
+    showSpotifyFeedback('Logged out successfully', 'info');
+    // Clear feedback after a moment
+    setTimeout(() => {
+      spotifyFeedback.textContent = '';
+      spotifyFeedback.className = 'spotify-feedback';
+    }, 2000);
   }
 });
 
