@@ -23,6 +23,14 @@ body {
   border-bottom: 3px solid #f5a623;
 }
 
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
 .header h1 {
   font-size: 18px;
   font-weight: 600;
@@ -160,4 +168,141 @@ body {
 .bandcamp-button:active {
   background-color: #c08016;
   border-color: #c08016;
+}
+
+/* Spotify Integration Styles */
+
+.spotify-login-btn {
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+}
+
+.spotify-login-btn:hover {
+  background-color: #1ed760;
+  transform: scale(1.02);
+}
+
+.spotify-login-btn:active {
+  background-color: #1aa34a;
+}
+
+.spotify-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #1DB954;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #1DB954;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.spotify-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.spotify-save-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: none;
+  width: 100%;
+  max-width: 250px;
+}
+
+.spotify-save-btn:hover:not(:disabled) {
+  background-color: #1ed760;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.4);
+}
+
+.spotify-save-btn:active:not(:disabled) {
+  background-color: #1aa34a;
+  transform: translateY(0);
+}
+
+.spotify-save-btn:disabled {
+  background-color: #cccccc;
+  color: #888888;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.spotify-save-btn.loading {
+  background-color: #1DB954;
+  opacity: 0.8;
+  cursor: wait;
+}
+
+.spotify-save-btn.success {
+  background-color: #1DB954;
+}
+
+.spotify-save-btn.error {
+  background-color: #e74c3c;
+}
+
+.spotify-feedback {
+  font-size: 12px;
+  text-align: center;
+  min-height: 18px;
+  transition: all 0.3s ease;
+}
+
+.spotify-feedback.success {
+  color: #1DB954;
+  font-weight: 500;
+}
+
+.spotify-feedback.error {
+  color: #e74c3c;
+  font-weight: 500;
+}
+
+.spotify-feedback.info {
+  color: #666666;
+  font-style: italic;
 }

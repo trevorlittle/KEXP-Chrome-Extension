@@ -1,10 +1,16 @@
 {
   "manifest_version": 3,
   "name": "KEXP Now Playing",
-  "version": "1.0",
-  "description": "Display what's currently playing on KEXP.org radio stream",
+  "version": "2.0",
+  "description": "Display what's currently playing on KEXP.org radio stream and save tracks to Spotify",
+  "permissions": [
+    "identity",
+    "storage"
+  ],
   "host_permissions": [
-    "https://api.kexp.org/*"
+    "https://api.kexp.org/*",
+    "https://accounts.spotify.com/*",
+    "https://api.spotify.com/*"
   ],
   "action": {
     "default_popup": "popup.html",
