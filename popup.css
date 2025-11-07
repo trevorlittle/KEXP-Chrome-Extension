@@ -254,50 +254,71 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #1DB954;
-  color: white;
-  border: none;
+  background-color: #f5a623;
+  color: #1a1a1a;
+  border: 2px solid #f5a623;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 4px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  text-transform: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   width: 100%;
   max-width: 250px;
 }
 
+.spotify-save-btn svg {
+  fill: #1a1a1a;
+}
+
 .spotify-save-btn:hover:not(:disabled) {
-  background-color: #1ed760;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(29, 185, 84, 0.4);
+  background-color: #d89419;
+  border-color: #d89419;
 }
 
 .spotify-save-btn:active:not(:disabled) {
-  background-color: #1aa34a;
-  transform: translateY(0);
+  background-color: #c08016;
+  border-color: #c08016;
 }
 
 .spotify-save-btn:disabled {
-  background-color: #cccccc;
-  color: #888888;
+  background-color: #e8e4d9;
+  color: #999999;
+  border-color: #d0ccc1;
   cursor: not-allowed;
   opacity: 0.6;
 }
 
+.spotify-save-btn:disabled svg {
+  fill: #999999;
+}
+
 .spotify-save-btn.loading {
-  background-color: #1DB954;
+  background-color: #f5a623;
   opacity: 0.8;
   cursor: wait;
 }
 
 .spotify-save-btn.success {
-  background-color: #1DB954;
+  background-color: #4CAF50;
+  border-color: #4CAF50;
+  color: white;
+}
+
+.spotify-save-btn.success svg {
+  fill: white;
 }
 
 .spotify-save-btn.error {
   background-color: #e74c3c;
+  border-color: #e74c3c;
+  color: white;
+}
+
+.spotify-save-btn.error svg {
+  fill: white;
 }
 
 .spotify-feedback {
@@ -308,7 +329,7 @@ body {
 }
 
 .spotify-feedback.success {
-  color: #1DB954;
+  color: #4CAF50;
   font-weight: 500;
 }
 
@@ -318,6 +339,6 @@ body {
 }
 
 .spotify-feedback.info {
-  color: #666666;
+  color: #888888;
   font-style: italic;
 }
