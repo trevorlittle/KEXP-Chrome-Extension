@@ -150,6 +150,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 220px;
   background-color: #f5a623;
   color: #1a1a1a;
   text-decoration: none;
@@ -262,6 +263,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 220px;
   background-color: #f5a623;
   color: #1a1a1a;
   border: 2px solid #f5a623;
