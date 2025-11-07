@@ -250,10 +250,7 @@ body {
 }
 
 .spotify-save-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: inline-block;
   background-color: #f5a623;
   color: #1a1a1a;
   border: 2px solid #f5a623;
@@ -265,10 +262,6 @@ body {
   transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.spotify-save-btn svg {
-  fill: #1a1a1a;
 }
 
 .spotify-save-btn:hover:not(:disabled) {
@@ -289,10 +282,6 @@ body {
   opacity: 0.6;
 }
 
-.spotify-save-btn:disabled svg {
-  fill: #999999;
-}
-
 .spotify-save-btn.loading {
   background-color: #f5a623;
   opacity: 0.8;
@@ -305,18 +294,10 @@ body {
   color: white;
 }
 
-.spotify-save-btn.success svg {
-  fill: white;
-}
-
 .spotify-save-btn.error {
   background-color: #e74c3c;
   border-color: #e74c3c;
   color: white;
-}
-
-.spotify-save-btn.error svg {
-  fill: white;
 }
 
 .spotify-feedback {
