@@ -163,8 +163,7 @@ body {
   border: 2px solid #f5a623;
 }
 
-.bandcamp-button svg {
-  fill: #1a1a1a;
+.bandcamp-button img {
   flex-shrink: 0;
 }
 
